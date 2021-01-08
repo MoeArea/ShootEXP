@@ -1,0 +1,25 @@
+# %OWNER%表示所有者，%RECIPIENT%表示射出经验时的施法对象，%AMOUNT%表示包含的经验量
+item:
+  name: '&e&l粘稠的经验'
+  lore:
+  - '&3所有者: &f%OWNER%'
+  - '&3赠予: &f%RECIPIENT%'
+  - '&3经验量: &f%AMOUNT%'
+  - '&d♥ &7右键可食用 &d♥'
+
+messages:
+  shoot: '&3在对 &e%DEFENDER% &3进行了 &e%TIMES% &3次攻击后, &e%ATTACKER% &3射出了一滩粘稠的经验 (经验量: &b%AMOUNT%&3)'
+  shoot-no-exp: '&3在对 &e%DEFENDER% &3进行了 &e%TIMES% &3次攻击后, &e%ATTACKER% &3没有射出经验, 他已经一滴都不剩了'
+  eat: '&e%PLAYER% &3吃掉了 &e%OWNER% &3在对 &e%RECIPIENT% &3施法时产生的粘稠的经验 (经验量: &b%AMOUNT%&3)'
+
+#命令提示
+command:
+  invalid: '&4命令错误!'
+  no-permission: '&4权限不足!'
+  player-only: '&4该命令只能由玩家执行!'
+  reloaded: '&a配置文件已重载!'
+  help:
+    title: '&3&lShootEXP指令帮助'
+    help: '&3显示帮助信息: &b/shootexp help'
+    item: '&3获取经验物品: &b/shootexp item <所有者> <赠予者> <数量>'
+    reload: '&3重载插件: &b/shootexp reload'

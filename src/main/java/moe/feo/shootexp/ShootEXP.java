@@ -1,0 +1,25 @@
+package moe.feo.shootexp;
+
+import moe.feo.shootexp.config.Config;
+import moe.feo.shootexp.config.Language;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class ShootEXP extends JavaPlugin {
+
+	@Override
+	public void onEnable() {
+		saveDefaultConfig();
+		Config.load();
+		Language.saveDefault();
+		Language.load();
+		getServer().getPluginManager().registerEvents(new AttackListener(), this);
+		getServer().getPluginManager().registerEvents(new EatListener(), this);
+		this.getCommand("shootexp").setExecutor(Commands.getInstance());
+		this.getCommand("shootexp").setTabCompleter(Commands.getInstance());
+	}
+
+	@Override
+	public void onDisable() {
+
+	}
+}
