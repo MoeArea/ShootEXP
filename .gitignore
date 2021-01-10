@@ -1,9 +1,8 @@
 #IDEA files
 .idea/
-dependency-reduced-pom.xml
 ShootEXP.iml
 
 # Target folder
 target/
 
-
+dependency-reduced-pom.xml
