@@ -1,13 +1,15 @@
 package moe.feo.shootexp;
 
 import moe.feo.shootexp.config.Config;
+import org.bukkit.Bukkit;
 import org.bukkit.SoundCategory;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 
-import java.util.List;
+import java.util.logging.Level;
 
 public class AttackListener implements Listener {
 
@@ -15,24 +17,18 @@ public class AttackListener implements Listener {
 	public void onShift(PlayerToggleSneakEvent e) {
 		if (e.isSneaking()) {// 按下了shift
 			Player attacker = e.getPlayer();
-			List<Player> playerList = e.getPlayer().getWorld().getPlayers();
-			//e.getPlayer().getWorld().getNearbyEntities();
-			Player partner = null;
-			double partnerDistance = Config.ATTACK_DISTANCE.getDouble();// 同伴最大距离
-			for (Player p : playerList) {
-				if (p.equals(attacker)) {// 要排除自己
-					continue;
-				}
-				double distance = e.getPlayer().getLocation().distance(p.getLocation());
-				if (distance <= 2) {
-					if (partner == null || distance < partnerDistance) {// 如果这个玩家比之前的玩家更靠近主角
-						partner = p;
-						partnerDistance = distance;
-					}
-				}
-			}
+			Entity partner = Util.getNearestEntity(attacker, Config.ATTACK_DISTANCE.getDouble());
 			if (partner == null) {// 该玩家没有干任何人
 				return;
+			}
+			try {
+				Class clazz = Class.forName("org.bukkit.entity." + Config.ENTITY_TYPE.getString());
+				// 如果这个实体不是配置文件中定义的实体类型
+				if (!clazz.isInstance(partner)) {
+					return;
+				}
+			} catch (ClassNotFoundException exception) {
+				Bukkit.getLogger().log(Level.SEVERE, "Illegal Entity type.", exception);
 			}
 			if (!Couple.hasCouple(attacker.getUniqueId())) {// 没有该玩家数据，说明该玩家之前没有在干活
 				Couple couple = new Couple(attacker, partner);

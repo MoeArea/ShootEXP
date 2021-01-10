@@ -3,7 +3,6 @@ package moe.feo.shootexp;
 import moe.feo.shootexp.config.Config;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
-import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -60,7 +59,6 @@ public class PlayerStatus {
 				.setVariable("STOCK", stock)
 				.setVariable("MAXSTOCK", Config.MAX_STOCK.getInt());
 		double result = e.evaluate();
-		Bukkit.getServer().getLogger().warning("shoot:"+timesOfShoot+" max:"+Config.MAX_STOCK.getInt()+" stock:"+stock+" result:"+result);
 		return (int) result;
 	}
 
@@ -69,9 +67,7 @@ public class PlayerStatus {
 		if (stock > 0) {// 经验存量大于0，开始计算射出量
 			amount = getShootAmount();
 		}
-		Bukkit.getServer().getLogger().warning("stock before: "+stock);
 		stock = stock - amount;
-		Bukkit.getServer().getLogger().warning("stock after: "+stock);
 		timesOfShoot++;
 		if (restoreShootTask == null) {// 如果没有恢复发射次数任务正在进行
 			int period = Config.RESTORE_SHOOT_PERIOD.getInt();

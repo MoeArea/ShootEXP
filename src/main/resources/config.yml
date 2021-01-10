@@ -12,6 +12,10 @@ required-attack-times: '1.618^SHOOT + 10'
 # SHOOT 表示已施法次数，STOCK 表示经验存量，MAXSTOCK表示最大经验存量
 shoot-amount: 'STOCK / 2'
 
+# 可施法实体的类型，Entity表示全部，Creature表示生物，更多分类请查看下方网址
+# https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/package-summary.html
+entity-type: 'Creature'
+
 # 经验类型：VANILLA（原版）、SKILLAPI、MMOCORE
 exp-type: 'VANILLA'
 
