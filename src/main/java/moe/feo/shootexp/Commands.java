@@ -88,11 +88,20 @@ public class Commands implements TabExecutor {
 			case "help": {
 				sender.sendMessage(Language.COMMAND_HELP_TITLE.getString());
 				sender.sendMessage(Language.COMMAND_HELP_HELP.getString());
-				if (sender.hasPermission("shootexp.reload")) {
-					sender.sendMessage(Language.COMMAND_HELP_RELOAD.getString());
+				if (sender.hasPermission("shootexp.status")) {
+					sender.sendMessage(Language.COMMAND_HELP_STATUS.getString());
 				}
 				if (sender.hasPermission("shootexp.item")) {
 					sender.sendMessage(Language.COMMAND_HELP_ITEM.getString());
+				}
+				if (sender.hasPermission("shootexp.restore")) {
+					sender.sendMessage(Language.COMMAND_HELP_RESTORE.getString());
+				}
+				if (sender.hasPermission("shootexp.set")) {
+					sender.sendMessage(Language.COMMAND_HELP_SET.getString());
+				}
+				if (sender.hasPermission("shootexp.reload")) {
+					sender.sendMessage(Language.COMMAND_HELP_RELOAD.getString());
 				}
 				break;
 			}
