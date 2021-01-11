@@ -32,13 +32,13 @@ attack:
 restore:
   # 施法次数
   shoot:
-    # 恢复一次施法次数的时间间隔（单位：tick)
+    # 恢复一次施法次数的时间间隔（单位：tick）
     period: 6000
     # 恢复数量
     amount: 1
   # 经验存量
   stock:
-    # 恢复一次经验存量的时间间隔（单位：tick)
+    # 恢复一次经验存量的时间间隔（单位：tick）
     period: 6000
     # 恢复数量
     amount: 200
