@@ -37,6 +37,7 @@ public class PlayerStatusManager {
 	 * 玩家的UUID
 	 * @return 玩家的状态
 	 */
+
 	public static PlayerStatus getStatus(UUID uuid) {
 		return statusMap.get(uuid);
 	}

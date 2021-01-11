@@ -11,9 +11,12 @@ public enum Language {
 	ITEM_NAME("item.name"), ITEM_LORE("item.lore"), MESSAGES_SHOOT("messages.shoot"),
 	MESSAGES_SHOOT_NO_EXP("messages.shoot-no-exp"), MESSAGES_EAT("messages.eat"),
 	COMMAND_INVALID("command.invalid"), COMMAND_NO_PERMISSION("command.no-permission"),
-	COMMAND_PLAYER_ONLY("player-only"), COMMAND_RELOADED("command.reloaded"),
-	COMMAND_HELP_TITLE("command.help.title"), COMMAND_HELP_HELP("command.help.help"),
-	COMMAND_HELP_ITEM("command.help.item"), COMMAND_HELP_RELOAD("command.help.reload");
+	COMMAND_PLAYER_ONLY("player-only"), COMMAND_STATUS("command.status"),
+	COMMAND_RESTORE("command.restore"), COMMAND_SET("command.set"),
+	COMMAND_RELOADED("command.reloaded"), COMMAND_HELP_TITLE("command.help.title"),
+	COMMAND_HELP_HELP("command.help.help"), COMMAND_HELP_STATUS("command.help.status"),
+	COMMAND_HELP_ITEM("command.help.item"), COMMAND_HELP_RESTORE("command.help.restore"),
+	COMMAND_HELP_SET("command.help.set"), COMMAND_HELP_RELOAD("command.help.reload");
 
 	private static FileConfiguration config;
 	private final String path;

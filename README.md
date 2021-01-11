@@ -6,10 +6,16 @@
 - 重启服务器
 
 ## 命令与权限
-| 命令                                  | 权限             | 描述          |
-| ------------------------------------ | --------------- | ------------- |
-| /shootexp reload                     | shootexp.reload | 重载插件       |
-| /shootexp item <所有者> <赠予者> <数量> | shootexp.item   | 获取一个经验物品 |
+| 命令                                    | 权限              | 描述              |
+| -------------------------------------- | ---------------- | ----------------- |
+| /shootexp help                         | 无                | 获取帮助           |
+| /shootexp status \[玩家\]               | shootexp.status  | 查看玩家或自己的状态 |
+| /shootexp item <所有者> <赠予者> <数量>   | shootexp.item    | 获取一个经验物品     |
+| /shootexp restore all <玩家>            | shootexp.restore | 恢复玩家的全部状态   |
+| /shootexp restore times <玩家> <次数>    | shootexp.restore | 恢复玩家的射出次数   |
+| /shootexp restore stock <玩家> <数量>    | shootexp.restore | 恢复玩家的经验存量   |
+| /shootexp set <玩家> <射出次数> <经验存量> | shootexp.set     | 设置玩家的状态      |
+| /shootexp reload                       | shootexp.reload  | 重载插件           |
 
 ## 插件配置
 一般来说默认的配置就适合大多数服务器了，但是ShootEXP也同样提供了各种设置来满足服主的个性化需求。配置文件和大多数插件一样就在插件文件夹下的config.yml。方便起见，我先解释一些在下面的介绍中会使用的词语：
