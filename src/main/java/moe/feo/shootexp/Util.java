@@ -145,7 +145,7 @@ public class Util {
 				Bukkit.getLogger().log(Level.SEVERE, "Illegal Entity type.", e);
 			}
 		}
-		// 便利实体列表
+		// 遍历实体列表
 		double partnerDistance = range;// 同伴最大距离
 		for (Entity entity : entityList) {
 			if (entity.equals(self)) {
