@@ -18,20 +18,34 @@ public enum Language {
 	private static FileConfiguration config;
 	private final String path;
 
+	/**
+	 * @param path
+	 * 此项语言的路径
+	 */
 	Language(String path) {
 		this.path = path;
 	}
 
+	/**
+	 * 加载语言文件
+	 */
 	public static void load() {
 		String lang = Config.LANG.getString();
 		String fileName = "lang/" + lang + ".yml";
 		config = ConfigUtil.load(fileName);
 	}
 
+	/**
+	 * 保存默认的语言文件
+	 */
 	public static void saveDefault() {
 		ConfigUtil.saveDefault("lang/zh_CN.yml");
 	}
 
+	/**
+	 * 获取字符串，并转换样式代码
+	 * @return 最终的字符串
+	 */
 	public String getString() {
 		String string = config.getString(path);
 		if (string != null){
@@ -40,6 +54,10 @@ public enum Language {
 		return string;
 	}
 
+	/**
+	 * 获取字符串list，并转换每个元素的样式代码
+	 * @return 最终的字符串list
+	 */
 	public List<String> getStringList() {
 		List<String> list = new ArrayList<>();
 		List<String> source = config.getStringList(path);

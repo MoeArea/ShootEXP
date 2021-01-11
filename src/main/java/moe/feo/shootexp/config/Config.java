@@ -4,6 +4,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.List;
 
+/**
+ * 插件配置
+ */
 public enum Config {
 
 	LANG("lang"), MAX_STOCK("max-stock"), REQUIRED_ATTACK_TIMES("required-attack-times"),
@@ -18,10 +21,17 @@ public enum Config {
 	private static FileConfiguration config;
 	private final String path;
 
+	/**
+	 * @param path
+	 * 此设置的路径
+	 */
 	Config(String path) {
 		this.path = path;
 	}
 
+	/**
+	 * 加载配置文件
+	 */
 	public static void load() {
 		config = ConfigUtil.load("config.yml");
 	}

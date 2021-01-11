@@ -4,6 +4,9 @@ import moe.feo.shootexp.config.Config;
 import moe.feo.shootexp.config.Language;
 import org.bukkit.plugin.java.JavaPlugin;
 
+/**
+ * 插件主类
+ */
 public class ShootEXP extends JavaPlugin {
 
 	@Override

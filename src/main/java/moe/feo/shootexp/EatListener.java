@@ -11,6 +11,9 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * 监听玩家右键
+ */
 public class EatListener implements Listener {
 
 	@EventHandler

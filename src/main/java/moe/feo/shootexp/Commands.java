@@ -10,6 +10,9 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 命令执行器
+ */
 public class Commands implements TabExecutor {
 
 	private static final Commands executor = new Commands();

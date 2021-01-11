@@ -14,9 +14,21 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 
+/**
+ * 工具类
+ */
 public class Util {
 
-	// 将占位符替换为可翻译字符串
+	/**
+	 * 将占位符替换为可翻译字符串，模仿原版聊天的颜色与格式的运作方法
+	 * @param msg
+	 * 原始消息
+	 * @param placeholder
+	 * 占位符
+	 * @param path
+	 * 可翻译字符串路径
+	 * @return 最终的文字组件
+	 */
 	public static TextComponent translateEntityComponent(String msg, String placeholder, String path) {
 		String[] normalMessages = msg.split(placeholder);
 		TextComponent component = new TextComponent();
@@ -64,6 +76,16 @@ public class Util {
 		return component;
 	}
 
+	/**
+	 * 用给定的颜色和格式格式化组件
+	 * @param component
+	 * 需要被格式化的组件
+	 * @param color
+	 * 颜色代码
+	 * @param formats
+	 * 格式代码list
+	 * @return 格式化后的组件
+	 */
 	// 格式化组件
 	public static BaseComponent formatBaseComponent(BaseComponent component, char color, List<Character> formats) {
 		// 处理颜色字符
@@ -98,6 +120,16 @@ public class Util {
 		return component;
 	}
 
+	/**
+	 * 获取给定范围内属于给定类型的最近的实体
+	 * @param self
+	 * 需要排除的自己
+	 * @param range
+	 * 范围
+	 * @param includes
+	 * 实体的类型列表
+	 * @return 最近的实体
+	 */
 	public static Entity getNearestEntity(Entity self, double range, List<String> includes) {
 		World world = self.getWorld();
 		Location location = self.getLocation();

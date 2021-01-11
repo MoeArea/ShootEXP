@@ -13,6 +13,9 @@ import org.bukkit.persistence.PersistentDataType;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 这个类表示一滩粘稠的经验
+ */
 public class EXP {
 
 	private static final NamespacedKey ownerKey = new NamespacedKey(ShootEXP.getPlugin(ShootEXP.class), "owner");
@@ -24,6 +27,15 @@ public class EXP {
 	private final int amount;
 	private final ItemStack item;
 
+	/**
+	 * 构造一滩粘稠的经验
+	 * @param owner
+	 * 经验所有者
+	 * @param recipient
+	 * 经验赠予者
+	 * @param amount
+	 * 经验数量
+	 */
 	public EXP(String owner, String recipient, int amount) {
 		this.owner = owner;
 		this.recipient = recipient;
@@ -31,6 +43,11 @@ public class EXP {
 		this.item = genEXPItem();
 	}
 
+	/**
+	 * 构造一滩粘稠的经验
+	 * @param item
+	 * 经验物品
+	 */
 	public EXP(ItemStack item) {
 		if (item.hasItemMeta()) {
 			ItemMeta meta = item.getItemMeta();
@@ -52,6 +69,12 @@ public class EXP {
 		this.item = item;
 	}
 
+	/**
+	 * 判断物品是否为粘稠的经验
+	 * @param item
+	 * 物品
+	 * @return 物品是否为粘稠的经验
+	 */
 	public static boolean isEXPItem(ItemStack item) {
 		if (item.getType() == Material.BONE_MEAL || item.hasItemMeta()) {
 			ItemMeta meta = item.getItemMeta();
@@ -63,6 +86,10 @@ public class EXP {
 		return false;
 	}
 
+	/**
+	 * 生成一个经验物品
+	 * @return 生成的经验物品
+	 */
 	private ItemStack genEXPItem() {
 		ItemStack item = new ItemStack(Material.BONE_MEAL);
 		ItemMeta meta = Bukkit.getItemFactory().getItemMeta(Material.BONE_MEAL);
@@ -87,10 +114,18 @@ public class EXP {
 		return item;
 	}
 
+	/**
+	 * 获取经验物品
+	 * @return 经验物品
+	 */
 	public ItemStack getEXPItem() {
 		return item;
 	}
 
+	/**
+	 * 获取经验所有者的名称
+	 * @return 经验所有者的名称
+	 */
 	public String getOwner() {
 		if (owner == null) {
 			return "UNKNOWN";
@@ -98,6 +133,10 @@ public class EXP {
 		return owner;
 	}
 
+	/**
+	 * 获取经验的赠予者
+	 * @return 经验的赠予者
+	 */
 	public String getRecipient() {
 		if (recipient == null) {
 			return "UNKNOWN";
@@ -105,6 +144,10 @@ public class EXP {
 		return recipient;
 	}
 
+	/**
+	 * 获取这滩经验所蕴含的经验数量
+	 * @return 经验的数量
+	 */
 	public int getAmount() {
 		return amount;
 	}

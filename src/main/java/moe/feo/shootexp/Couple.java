@@ -9,19 +9,24 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
+/**
+ * Couple表示一对情侣
+ * 包括一个进攻方和防守方
+ */
 public class Couple {
 
 	private final Player attacker;// 进攻方
 	private Entity defender;// 防守方
 	private int numOfAttack;// 攻击次数
-	private final int period = 20;// 循环间隔
+	private final int period = 20;// 循环检查的间隔
 
-	private static final Map<UUID, Couple> activeCoupleMap = new HashMap<>();// 正在干活的玩家名单
-
+	/**
+	 * 初始化一对情侣
+	 * @param attacker
+	 * 进攻方
+	 * @param defender
+	 * 防守方
+	 */
 	public Couple(Player attacker, Entity defender) {
 		this.attacker = attacker;
 		this.defender = defender;
@@ -37,25 +42,32 @@ public class Couple {
 			checkTimes();
 		}
 
-		public void checkTimes() {// 检查超时
+		/**
+		 * 检查玩家是否超时
+		 */
+		public void checkTimes() {
 			if (numOfAttack > cacheNumOfAttack) {// 攻击次数增加
 				attackTimeoutCount = 0;// 超时计数置零
 			} else {
 				attackTimeoutCount++;// 超时计数增加
 			}
-			if (attackTimeoutCount > getCountWhenTimeOut()) {// 超时
+			int timeoutCount = Config.ATTACK_TIMEOUT.getInt() / period;
+			if (attackTimeoutCount > timeoutCount) {// 超时
 				timer.cancel();
-				activeCoupleMap.remove(attacker.getUniqueId());// 从干活玩家名单中删除
+				CoupleManager.removeCouple(attacker.getUniqueId());// 从干活玩家名单中删除
 			}
 			cacheNumOfAttack = numOfAttack;
 		}
 
-		public void checkNum() {// 检查攻击次数
-			if (!PlayerStatus.hasStatus(attacker.getUniqueId())) {// 如果不存在攻击者的状态数据
-				PlayerStatus.addStatus(attacker.getUniqueId(), new PlayerStatus());// 放一个数据进去
+		/**
+		 * 检查攻击次数
+		 */
+		public void checkNum() {
+			if (!PlayerStatusManager.hasStatus(attacker.getUniqueId())) {// 如果不存在攻击者的状态数据
+				PlayerStatusManager.addStatus(attacker.getUniqueId(), new PlayerStatus());// 放一个数据进去
 			}
-			if (numOfAttack >= PlayerStatus.getStatus(attacker.getUniqueId()).getRequiredAttackTimes()) {// 当攻击次数大于所需次数
-				int EXPAmount = PlayerStatus.getStatus(attacker.getUniqueId()).ejaculation();// 射一次
+			if (numOfAttack >= PlayerStatusManager.getStatus(attacker.getUniqueId()).getRequiredAttackTimes()) {// 当攻击次数大于所需次数
+				int EXPAmount = PlayerStatusManager.getStatus(attacker.getUniqueId()).ejaculation();// 射一次
 				String msg;
 				String sound;
 				if (EXPAmount != 0) {
@@ -85,32 +97,24 @@ public class Couple {
 				}
 				attacker.getWorld().playSound(attacker.getLocation(), sound, SoundCategory.PLAYERS, 1, 1);
 				timer.cancel();// 将定时器移除
-				activeCoupleMap.remove(attacker.getUniqueId());// 把这个对象从正在干活的列表中移除
+				CoupleManager.removeCouple(attacker.getUniqueId());// 把这个对象从正在干活的列表中移除
 			}
 		}
 	};
 
+	/**
+	 * 设置防守方
+	 * @param defender
+	 * 防守方
+	 */
 	public void setDefender(Entity defender) {
 		this.defender = defender;
 	}
 
-	public int getCountWhenTimeOut() {// 获取达到超时条件的count数值, i为超时秒数
-		return Config.ATTACK_TIMEOUT.getInt() / period;
-	}
-
+	/**
+	 * 攻击一次
+	 */
 	public void attack() {
 		numOfAttack++;// 攻击次数增加
-	}
-
-	public static void addCouple(UUID uuid, Couple couple) {
-		activeCoupleMap.put(uuid, couple);
-	}
-
-	public static boolean hasCouple(UUID uuid) {
-		return activeCoupleMap.containsKey(uuid);
-	}
-
-	public static Couple getCouple(UUID uuid) {
-		return activeCoupleMap.get(uuid);
 	}
 }
