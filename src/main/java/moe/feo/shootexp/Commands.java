@@ -30,19 +30,54 @@ public class Commands implements TabExecutor {
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {
 		if (args.length == 1) {
 			List<String> list = new ArrayList<>();
-			String arg = args[0].toLowerCase();
-			if ("help".startsWith(arg)) list.add("help");
-			if ("item".startsWith(arg) && sender.hasPermission("shootexp.item")) {
+			String main = args[0].toLowerCase();
+			if ("help".startsWith(main)) list.add("help");
+			if ("status".startsWith(main) && sender.hasPermission("shootexp.status")) {
+				list.add("status");
+			}
+			if ("item".startsWith(main) && sender.hasPermission("shootexp.item")) {
 				list.add("item");
 			}
-			if ("reload".startsWith(arg) && sender.hasPermission("shootexp.reload")) {
+			if ("restore".startsWith(main) && sender.hasPermission("shootexp.restore")) {
+				list.add("restore");
+			}
+			if ("set".startsWith(main) && sender.hasPermission("shootexp.set")) {
+				list.add("set");
+			}
+			if ("reload".startsWith(main) && sender.hasPermission("shootexp.reload")) {
 				list.add("reload");
 			}
-			return list;
+			if (list.size() > 0) {
+				return list;
+			} else {
+				return null;
+			}
+		}
+		if (args.length == 2) {
+			List<String> list = new ArrayList<>();
+			String main = args[0];
+			String sub1 = args[1];
+			if ("restore".equals(main) && sender.hasPermission("shootexp.restore")) {
+				if ("all".startsWith(sub1)) {
+					list.add("all");
+				}
+				if ("times".startsWith(sub1)) {
+					list.add("times");
+				}
+				if ("stock".startsWith(sub1)) {
+					list.add("stock");
+				}
+			}
+			if (list.size() > 0) {
+				return list;
+			} else {
+				return null;
+			}
 		}
 		return null;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (args.length == 0) {// 没有带参数
@@ -93,6 +128,7 @@ public class Commands implements TabExecutor {
 				String msg = Language.COMMAND_STATUS.getString().replace("%PLAYER%", name)
 						.replace("%TIMES%", Integer.toString(times)).replace("%STOCK%", Integer.toString(stock));
 				sender.sendMessage(msg);
+				break;
 			}
 			case "item": {
 				if (!(sender instanceof Player)) {
@@ -239,6 +275,7 @@ public class Commands implements TabExecutor {
 				status.setTimesOfShoot(times);
 				status.setStock(stock);
 				sender.sendMessage(Language.COMMAND_SET.getString());
+				break;
 			}
 			case "reload": {
 				if (!sender.hasPermission("shootexp.reload")) {

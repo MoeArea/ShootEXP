@@ -17,7 +17,7 @@ command:
   invalid: '&4命令错误!'
   no-permission: '&4权限不足!'
   player-only: '&4该命令只能由玩家执行!'
-  status: '&a%PLAYER%的射出次数为: %TIMES%, 经验存量为: %STOCK%'
+  status: '&a%PLAYER% 的射出次数为: %TIMES%, 经验存量为: %STOCK%'
   restore: '&a该玩家已恢复!'
   set: '&a已设置该玩家的状态'
   reloaded: '&a配置文件已重载!'
