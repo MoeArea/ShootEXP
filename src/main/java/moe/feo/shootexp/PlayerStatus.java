@@ -21,7 +21,8 @@ public class PlayerStatus {
 	private BukkitRunnable getRestoreShootRunnable() {// 获取一个新的runnable
 		return new BukkitRunnable() {
 			public void run() {
-				if (restoreShoot()) {// 恢复一次
+				// 只要发射经验次数小于0就不会恢复，否则恢复一次并判断是否恢复满
+				if (timesOfShoot <= 0 || restoreShoot()) {// 恢复一次
 					restoreShootTask.cancel();//如果恢复满则退出定时器
 					restoreShootTask = null;
 				}
@@ -32,7 +33,8 @@ public class PlayerStatus {
 	private BukkitRunnable getRestoreStockRunnable() {// 获取一个新的runnable
 		return new BukkitRunnable() {
 			public void run() {
-				if (restoreStock()) {// 恢复一次
+				// 只要存量大于设定值就不会恢复，否则恢复一次并判断是否恢复满
+				if (stock >= Config.MAX_STOCK.getInt() || restoreStock()) {
 					restoreStockTask.cancel();//如果恢复满则退出定时器
 					restoreStockTask = null;
 				}
@@ -89,6 +91,11 @@ public class PlayerStatus {
 		return timesOfShoot == 0;
 	}
 
+	public boolean restoreShoot(int times) {// 恢复一次指定次数，并允许已射出次数为负数，返回是否恢复满
+		timesOfShoot = timesOfShoot - times;
+		return timesOfShoot <= 0;
+	}
+
 	public boolean restoreStock() {// 恢复一次，返回是否恢复满
 		stock = stock + Config.RESTORE_STOCK_AMOUNT.getInt();
 		// 检查属性是否合法
@@ -97,6 +104,11 @@ public class PlayerStatus {
 			stock = max;
 		}
 		return stock == max;
+	}
+
+	public boolean restoreStock(int amount) {// 恢复一次指定数量，并允许数量超过最大值，返回是否恢复满
+		stock = stock + amount;
+		return stock >= Config.MAX_STOCK.getInt();
 	}
 
 	public static void addStatus(UUID uuid, PlayerStatus status) {
