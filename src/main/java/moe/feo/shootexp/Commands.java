@@ -238,6 +238,7 @@ public class Commands implements TabExecutor {
 				}
 				status.setTimesOfShoot(times);
 				status.setStock(stock);
+				sender.sendMessage(Language.COMMAND_SET.getString());
 			}
 			case "reload": {
 				if (!sender.hasPermission("shootexp.reload")) {

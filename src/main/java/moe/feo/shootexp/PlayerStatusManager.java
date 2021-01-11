@@ -9,7 +9,7 @@ import java.util.UUID;
  */
 public class PlayerStatusManager {
 
-	private static Map<UUID, PlayerStatus> statusMap = new HashMap<>();
+	private static final Map<UUID, PlayerStatus> statusMap = new HashMap<>();
 
 	/**
 	 * 添加一个玩家状态
