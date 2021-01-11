@@ -15,10 +15,22 @@ permissions:
     description: 'All permissions.'
     default: op
     children:
+      shootexp.status: true
       shootexp.item: true
+      shootexp.restore: true
+      shootexp.set: true
       shootexp.reload: true
+  shootexp.status:
+    description: 'Check player status.'
+    default: true
   shootexp.item:
-    description: 'Get exp item'
+    description: 'Get exp item.'
+    default: op
+  shootexp.restore:
+    description: 'Restore status for player.'
+    default: op
+  shootexp.set:
+    description: 'Set status for player'
     default: op
   shootexp.reload:
     description: 'Reload plugin.'
