@@ -14,7 +14,9 @@ shoot-amount: 'STOCK / 2'
 
 # 可施法实体的类型，Entity表示全部，Creature表示生物，更多分类请查看下方网址
 # https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/package-summary.html
-entity-type: 'Creature'
+entity-type:
+- 'Player'
+- 'Creature'
 
 # 经验类型：VANILLA（原版）、SKILLAPI、MMOCORE
 exp-type: 'VANILLA'
@@ -55,4 +57,4 @@ sound:
   # 没东西射的声音
   shoot-no-exp: 'minecraft:entity.llama.eat'
   # 吃掉经验时的声音
-  eat: 'minecraft:entity.player.burp'
+  eat: 'minecraft:entity.generic.drink'

@@ -17,18 +17,9 @@ public class AttackListener implements Listener {
 	public void onShift(PlayerToggleSneakEvent e) {
 		if (e.isSneaking()) {// 按下了shift
 			Player attacker = e.getPlayer();
-			Entity partner = Util.getNearestEntity(attacker, Config.ATTACK_DISTANCE.getDouble());
+			Entity partner = Util.getNearestEntity(attacker, Config.ATTACK_DISTANCE.getDouble(), Config.ENTITY_TYPE.getStringList());
 			if (partner == null) {// 该玩家没有干任何人
 				return;
-			}
-			try {
-				Class clazz = Class.forName("org.bukkit.entity." + Config.ENTITY_TYPE.getString());
-				// 如果这个实体不是配置文件中定义的实体类型
-				if (!clazz.isInstance(partner)) {
-					return;
-				}
-			} catch (ClassNotFoundException exception) {
-				Bukkit.getLogger().log(Level.SEVERE, "Illegal Entity type.", exception);
 			}
 			if (!Couple.hasCouple(attacker.getUniqueId())) {// 没有该玩家数据，说明该玩家之前没有在干活
 				Couple couple = new Couple(attacker, partner);

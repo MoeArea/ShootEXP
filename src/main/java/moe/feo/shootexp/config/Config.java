@@ -2,6 +2,8 @@ package moe.feo.shootexp.config;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.util.List;
+
 public enum Config {
 
 	LANG("lang"), MAX_STOCK("max-stock"), REQUIRED_ATTACK_TIMES("required-attack-times"),
@@ -38,5 +40,9 @@ public enum Config {
 
 	public String getString() {
 		return config.getString(path);
+	}
+
+	public List<String> getStringList() {
+		return config.getStringList(path);
 	}
 }

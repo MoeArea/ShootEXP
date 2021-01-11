@@ -8,8 +8,8 @@ item:
   - '&d♥ &7右键可食用 &d♥'
 
 messages:
-  shoot: '&3在对 &e%DEFENDER% &3进行了 &e%TIMES% &3次攻击后, &e%ATTACKER% &3射出了一滩粘稠的经验 (经验量: &b%AMOUNT%&3)'
-  shoot-no-exp: '&3在对 &e%DEFENDER% &3进行了 &e%TIMES% &3次攻击后, &e%ATTACKER% &3没有射出经验, 他已经一滴都不剩了'
+  shoot: '&e%ATTACKER% &3在对 &e%DEFENDER% &3进行了 &e%TIMES% &3次攻击后, 射出了一滩粘稠的经验 (经验量: &b%AMOUNT%&3)'
+  shoot-no-exp: '&e%ATTACKER% &3在对 &e%DEFENDER% &3进行了 &e%TIMES% &3次攻击后, 没有射出经验, 他已经一滴都不剩了'
   eat: '&e%PLAYER% &3吃掉了 &e%OWNER% &3在对 &e%RECIPIENT% &3施法时产生的粘稠的经验 (经验量: &b%AMOUNT%&3)'
 
 #命令提示

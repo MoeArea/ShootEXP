@@ -73,8 +73,15 @@ public class Couple {
 					msg = msg.replace("%DEFENDER%", defender.getName());
 					Bukkit.getServer().broadcastMessage(msg);
 				} else {
-					String path = "entity.minecraft." + defender.getType().toString().toLowerCase();
-					Bukkit.spigot().broadcast(Util.translateEntityComponent(msg, "%DEFENDER%", path));
+					String defenderName = defender.getCustomName();
+					// 没有自定义名称，显示可翻译字符串名称
+					if (defenderName == null) {
+						String path = "entity.minecraft." + defender.getType().toString().toLowerCase();
+						Bukkit.spigot().broadcast(Util.translateEntityComponent(msg, "%DEFENDER%", path));
+					} else {// 有自定义名称，显示自定义名称
+						msg = msg.replace("%DEFENDER%", defender.getCustomName());
+						Bukkit.getServer().broadcastMessage(msg);
+					}
 				}
 				attacker.getWorld().playSound(attacker.getLocation(), sound, SoundCategory.PLAYERS, 1, 1);
 				timer.cancel();// 将定时器移除

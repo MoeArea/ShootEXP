@@ -4,6 +4,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.TranslatableComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -11,6 +12,7 @@ import org.bukkit.entity.Entity;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.logging.Level;
 
 public class Util {
 
@@ -29,7 +31,10 @@ public class Util {
 			component.addExtra(formatBaseComponent(normalMessageComponent, color, formats));
 			// 如果已经遍历到最后一句，就不用再往后加组件了
 			if (i == normalMessages.length - 1) {
-				break;
+				// 除非这条消息以占位符结尾...
+				if (!msg.endsWith(placeholder)) {
+					break;
+				}
 			}
 			// 处理颜色字符
 			char[] chars = normalMessage.toCharArray();
@@ -39,6 +44,8 @@ public class Util {
 					// 如果是颜色字符
 					if ("0123456789AaBbCcDdEeFfXx".contains(String.valueOf(code))) {
 						color = code;
+						// 原版的颜色字符会清掉后面字符的格式
+						formats.clear();
 					} else if ("KkLlMmNnOoRr".contains(String.valueOf(code))) {
 						formats.add(code);
 					}
@@ -91,14 +98,37 @@ public class Util {
 		return component;
 	}
 
-	public static Entity getNearestEntity(Entity self, double range) {
+	public static Entity getNearestEntity(Entity self, double range, List<String> includes) {
 		World world = self.getWorld();
 		Location location = self.getLocation();
 		Collection<Entity> entityList = world.getNearbyEntities(location, range, range, range);
 		Entity partner = null;
+		List<Class> classes = new ArrayList<>();
+		// 实体类型
+		for (String include : includes) {
+			try {
+				Class clazz = Class.forName("org.bukkit.entity." + include);
+				classes.add(clazz);
+			} catch (ClassNotFoundException e) {
+				Bukkit.getLogger().log(Level.SEVERE, "Illegal Entity type.", e);
+			}
+		}
+		// 便利实体列表
 		double partnerDistance = range;// 同伴最大距离
 		for (Entity entity : entityList) {
 			if (entity.equals(self)) {
+				continue;
+			}
+			// 判断是否为配置文件中定义的实体类型
+			boolean isDefinition = false;
+			for (Class clazz : classes) {
+				// 如果partner是这种类型
+				if (clazz.isInstance(entity)) {
+					isDefinition = true;
+					break;
+				}
+			}
+			if (!isDefinition) {
 				continue;
 			}
 			double cacheDistance = self.getLocation().distance(entity.getLocation());
