@@ -53,6 +53,16 @@ shoot-amount: 'STOCK / 2'
 ```
 `SHOOT`表示已施法次数，`STOCK`表示经验存量，`MAXSTOCK`表示最大经验存量，大部分的数学符号都能在这里使用。
 
+### 可施法实体类型
+一开始这个插件插件只能对玩家施法，但后来有一个玩家声称他很爱他家的旺财，希望也可以和旺财深入交流，于是现在的ShootEXP支持自定义可施法的实体对象：
+```yaml
+# 可施法实体的类型，Entity表示全部，Creature表示生物，更多分类请查看下方网址
+entity-type:
+- 'Player'
+- 'Creature'
+```
+[这个网页](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/package-summary.html) 包含了所有bukkit中的实体，只要是这里面的实体类型都可以填写。我知道有些xp系统比较特殊的玩家甚至想对非实体施法，以后我可能会添加这方面的更新。
+
 ### 经验类型
 为了能让RPG服主也用上这个插件，为了让世界充满❤，这个插件也支持SkillApi与MMOCore的经验：
 ```yaml
