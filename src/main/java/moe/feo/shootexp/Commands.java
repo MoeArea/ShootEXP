@@ -130,7 +130,7 @@ public class Commands implements TabExecutor {
 					break;
 				}
 				if (PlayerStatusManager.hasStatus(uuid)) {
-					PlayerStatus status = PlayerStatusManager.getStatus(((Player) sender).getUniqueId());
+					PlayerStatus status = PlayerStatusManager.getStatus(uuid);
 					times = status.getTimesOfShoot();
 					stock = status.getStock();
 				}
