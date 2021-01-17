@@ -1,6 +1,9 @@
 # 语言设置
 lang: zh_CN
 
+# 私密消息，只将消息发送到当事人而不公开广播信息
+private-message: false
+
 # 最大经验存量
 max-stock: 1000
 

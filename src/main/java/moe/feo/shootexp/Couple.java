@@ -2,6 +2,7 @@ package moe.feo.shootexp;
 
 import moe.feo.shootexp.config.Config;
 import moe.feo.shootexp.config.Language;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Entity;
@@ -68,6 +69,7 @@ public class Couple {
 			}
 			if (numOfAttack >= PlayerStatusManager.getStatus(attacker.getUniqueId()).getRequiredAttackTimes()) {// 当攻击次数大于所需次数
 				int EXPAmount = PlayerStatusManager.getStatus(attacker.getUniqueId()).ejaculation();// 射一次
+				boolean isTranslate = false;
 				String msg;
 				String sound;
 				if (EXPAmount != 0) {
@@ -83,15 +85,33 @@ public class Couple {
 				}
 				if (defender instanceof Player) {
 					msg = msg.replace("%DEFENDER%", defender.getName());
-					Bukkit.getServer().broadcastMessage(msg);
 				} else {
 					String defenderName = defender.getCustomName();
 					// 没有自定义名称，显示可翻译字符串名称
 					if (defenderName == null) {
-						String path = "entity.minecraft." + defender.getType().toString().toLowerCase();
-						Bukkit.spigot().broadcast(Util.translateEntityComponent(msg, "%DEFENDER%", path));
+						isTranslate = true;
 					} else {// 有自定义名称，显示自定义名称
 						msg = msg.replace("%DEFENDER%", defender.getCustomName());
+					}
+				}
+				if (isTranslate) {
+					String path = "entity.minecraft." + defender.getType().toString().toLowerCase();
+					TextComponent component = Util.translateEntityComponent(msg, "%DEFENDER%", path);
+					if (Config.PRIVATE_MESSAGE.getBoolean()) {
+						attacker.spigot().sendMessage(component);
+						if (defender instanceof Player) {
+							((Player) defender).spigot().sendMessage(component);
+						}
+					} else {
+						Bukkit.spigot().broadcast(component);
+					}
+				} else {
+					if (Config.PRIVATE_MESSAGE.getBoolean()) {
+						attacker.sendMessage(msg);
+						if (defender instanceof Player) {
+							defender.sendMessage(msg);
+						}
+					} else {
 						Bukkit.getServer().broadcastMessage(msg);
 					}
 				}
