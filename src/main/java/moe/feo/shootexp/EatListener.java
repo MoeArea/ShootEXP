@@ -44,7 +44,19 @@ public class EatListener implements Listener {
 			player.getWorld().playSound(player.getLocation(), Config.SOUND_EAT.getString(), SoundCategory.PLAYERS, 1, 1);
 			String msg = Language.MESSAGES_EAT.getString().replace("%PLAYER%", player.getName()).replace("%OWNER%", exp.getOwner())
 					.replace("%RECIPIENT%", exp.getRecipient()).replace("%AMOUNT%", String.valueOf(exp.getAmount()));
-			Bukkit.getServer().broadcastMessage(msg);
+			if (Config.PRIVATE_MESSAGE.getBoolean()) {
+				player.sendMessage(msg);
+				Player owner = Bukkit.getPlayer(exp.getOwner());
+				Player recipient = Bukkit.getPlayer(exp.getRecipient());
+				if (owner != null && owner.isOnline()) {
+					owner.sendMessage(msg);
+				}
+				if (recipient != null && recipient.isOnline()) {
+					recipient.sendMessage(msg);
+				}
+			} else {
+				Bukkit.getServer().broadcastMessage(msg);
+			}
 			item.setAmount(0);
 			e.setCancelled(true);
 		}
