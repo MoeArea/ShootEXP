@@ -71,13 +71,12 @@ public class EXP {
 	 * @return 物品是否为粘稠的经验
 	 */
 	public static boolean isEXPItem(ItemStack item) {
-
 		if (NMS_Class.version.equalsIgnoreCase("v1_12_R1")) {
-			if (item.getType() != Material.getMaterial("INK_SACK") || !item.hasItemMeta() || item.getDurability() != 15) {
+			if (item.getType() != Material.getMaterial("INK_SACK") && !item.hasItemMeta() && item.getDurability() != 15) {
 				return false;
 			}
 		} else {
-			if (item.getType() != Material.getMaterial("BONE_MEAL") || !item.hasItemMeta()) {
+			if (item.getType() != Material.getMaterial("BONE_MEAL") && !item.hasItemMeta()) {
 				return false;
 			}
 		}
@@ -119,7 +118,7 @@ public class EXP {
 		nbt.setString(ownerKey.getKey(),  owner);
 		nbt.setString(recipientKey.getKey(), recipient);
 		nbt.setInt(amountKey.getKey(), amount);
-
+		item = nbt.saveNBT();
 		return item;
 	}
 
