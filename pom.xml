@@ -6,7 +6,7 @@
 
 	<groupId>moe.feo.shootexp</groupId>
 	<artifactId>ShootEXP</artifactId>
-	<version>1.1</version>
+	<version>1.2</version>
 
 	<repositories>
 		<repository>
@@ -16,6 +16,10 @@
 		<repository>
 			<id>lumine</id>
 			<url>https://mvn.lumine.io/repository/maven-public/</url>
+		</repository>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
 		</repository>
 	</repositories>
 
@@ -41,6 +45,12 @@
 			<groupId>net.Indyuce</groupId>
 			<artifactId>MMOCore</artifactId>
 			<version>1.6.2</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.DieReicheErethons</groupId>
+			<artifactId>Brewery</artifactId>
+			<version>3.1.1</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
