@@ -21,21 +21,24 @@ public class EatListener implements Listener {
         Player player = e.getPlayer();
         Action action = e.getAction();
         ItemStack item = e.getItem();
+
         if (item == null) {
             return;
-        }
-        
-        // 检查玩家是否正在下蹲
-        if (player.isSneaking()) {
-            return; // 如果玩家正在下蹲，不执行右键使用操作
         }
 
         if (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) {
             if (!EXP.isEXPItem(item)) {
                 return;
             }
+            
+            // 检查右键点击的方块是否是炼药锅，
+            if (e.getClickedBlock() != null && e.getClickedBlock().getType() == org.bukkit.Material.CAULDRON) {
+                e.setCancelled(true);
+                return;
+            }
+
             EXP exp = new EXP(item);
-            switch (Config.EXP_TYPE.getString()){
+            switch (Config.EXP_TYPE.getString()) {
                 case "SKILLAPI":
                     com.sucy.skill.SkillAPI.getPlayerData(player)
                             .giveExp(exp.getAmount(), com.sucy.skill.api.enums.ExpSource.SPECIAL);
@@ -47,6 +50,7 @@ public class EatListener implements Listener {
                 default:
                     player.giveExp(exp.getAmount());
             }
+
             player.getWorld().playSound(player.getLocation(), Config.SOUND_EAT.getString(), SoundCategory.PLAYERS, 1, 1);
             String msg = Language.MESSAGES_EAT.getString().replace("%PLAYER%", player.getName()).replace("%OWNER%", exp.getOwner())
                     .replace("%RECIPIENT%", exp.getRecipient()).replace("%AMOUNT%", String.valueOf(exp.getAmount()));
