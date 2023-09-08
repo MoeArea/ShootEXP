@@ -26,9 +26,7 @@ public class EatListener implements Listener {
         }
         
         // 检查玩家是否正在下蹲
-        if (player.isSneaking()) {
-            return; // 如果玩家正在下蹲，不执行右键使用操作
-        }
+
 
         if (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) {
             if (!EXP.isEXPItem(item)) {
