@@ -30,7 +30,9 @@ public class EatListener implements Listener {
 			if (!EXP.isEXPItem(item)) {
 				return;
 			}
-			if (getServer().getPluginManager().getPlugin("Brewery").isEnabled() && action == Action.RIGHT_CLICK_BLOCK) {
+			if (((getServer().getPluginManager().getPlugin("Brewery") != null && getServer().getPluginManager().getPlugin("Brewery").isEnabled())
+					|| (getServer().getPluginManager().getPlugin("BreweryX") != null && getServer().getPluginManager().getPlugin("BreweryX").isEnabled()))
+					&& action == Action.RIGHT_CLICK_BLOCK) {
 				System.out.println("Material: " + e.getClickedBlock().getType().name());
 				if (BreweryApi.getBarrel(e.getClickedBlock()) != null || BreweryApi.getCauldron(e.getClickedBlock()) != null) {
 					return;
