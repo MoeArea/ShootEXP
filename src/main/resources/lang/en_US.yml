@@ -1,0 +1,31 @@
+# %OWNER% means the owner, %RECIPIENT% means the target when owner shoots, %AMOUNT% means the amount of experience contained
+item:
+  name: '&e&lSticky Experience'
+  lore:
+  - '&3Owner: &f%OWNER%'
+  - '&3Gift to: &f%RECIPIENT%'
+  - '&3Exp amount: &f%AMOUNT%'
+  - '&d♥ &7RIGHT CLICK TO EAT &d♥'
+
+messages:
+  shoot: '&e%ATTACKER% &3attacked &e%DEFENDER% &3for &e%TIMES% &3times, and shoots a puddle of sticky experience (Amount: &b%AMOUNT%&3)'
+  shoot-no-exp: '&e%ATTACKER% &3attacked &e%DEFENDER% &3for &e%TIMES% &3times, and did not shoot any experiences, he has no stock left'
+  eat: '&e%PLAYER% &3ate the sticky experience that shoots by &e%OWNER% &3for attack &e%RECIPIENT% &3 (Amount: &b%AMOUNT%&3)'
+
+#Command Hints
+command:
+  invalid: '&4Command invalid!'
+  no-permission: '&4You don''t have the permission!'
+  player-only: '&4This command can only be used by players!'
+  status: '&a%PLAYER%''s shoot times is: %TIMES%, exp stock is: %STOCK%'
+  restore: '&aRestored the player!'
+  set: '&aPlayer''s status has been set!'
+  reloaded: '&aPlugin reloaded!'
+  help:
+    title: '&3&lShootEXP command help'
+    help: '&3Show the help message: &b/shootexp help'
+    status: '&3Show the status of player: &b/shootexp status [PLAYER]'
+    item: '&3Give an Exp Item: &b/shootexp item <OWNER> <DEFENDER> <AMOUNT>'
+    restore: '&3Restore player''s status: &b/shootexp restore <all|times|stock> <PLAYER>'
+    set: '&3Set player''s status: &b/shootexp set <PLAYER> <TIMES> <STOCK>'
+    reload: '&3Reload the plugin: &b/shootexp reload'
